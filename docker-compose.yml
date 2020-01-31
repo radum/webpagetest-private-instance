@@ -7,7 +7,7 @@ services:
       - ./wpt_data/dat:/var/www/html/dat
       - ./wpt_data/results:/var/www/html/results
       - ./wpt_data/logs:/var/www/html/logs
-			- ./wpt-server/settings/locations.ini:/var/www/html/settings/locations.ini
+      - ./wpt-server/settings/locations.ini:/var/www/html/settings/locations.ini
       - ./wpt-server/settings/settings.ini:/var/www/html/settings/settings.ini
     ports:
       - 4000:80
@@ -16,15 +16,15 @@ services:
   wpt_agent:
     image: webpagetest/agent
     environment:
-      SERVER_URL: http://wpt_server/work/
+      SERVER_URL: http://localhost:4000/work/
       LOCATION: Local_Docker
       NAME: default-wpt-agent
-			EXTRA_ARGS: "--log /debug.log -vvvv"
+      EXTRA_ARGS: "--log /debug.log -vvvv"
     depends_on:
       - wpt_server
     privileged: true
     network_mode: "host"
     extra_hosts:
-      - "${EXTRA_HOST}"
-		env_file:
-			- wpt.env
+      - "local.dev:10.8.10.11"
+    env_file:
+      - wpt.env
