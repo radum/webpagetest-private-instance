@@ -1,0 +1,6 @@
+[submodule "wptserver-install"]
+	path = wptserver-install
+	url = https://github.com/WPO-Foundation/wptserver-install.git
+[submodule "wptagent-install"]
+	path = wptagent-install
+	url = https://github.com/WPO-Foundation/wptagent-install.git
