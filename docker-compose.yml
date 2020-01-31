@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  wpt_server:
+    image: webpagetest/server
+    volumes:
+      - ./volumes/wpt_data/dat:/var/www/html/dat
+      - ./volumes/wpt_data/results:/var/www/html/results
+      - ./volumes/wpt_data/logs:/var/www/html/logs
+      - ./locations.ini:/var/www/html/settings/locations.ini
+    ports:
+      - 4000:80
+    restart: unless-stopped
+
+  wpt_agent:
+    image: webpagetest/agent
+    environment:
+      SERVER_URL: http://localhost:4000/work/
+      LOCATION: Local_Docker
+      NAME: default-wpt-agent
+      SHAPER: "none"
+      EXTRA_ARGS: "-m debug --checknet yes --log /debug.log -vvvv"
+    depends_on:
+      - wpt_server
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+    network_mode: "host"
+    extra_hosts:
+      - "local.dev:10.8.10.11"

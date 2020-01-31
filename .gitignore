@@ -1,0 +1,6 @@
+.DS_Store
+
+volumes/wpt_data/dat/*
+volumes/wpt_data/logs/*
+volumes/wpt_data/results/*
+!volumes/wpt_data/**/.gitkeep
