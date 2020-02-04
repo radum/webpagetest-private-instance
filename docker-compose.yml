@@ -2,7 +2,8 @@ version: "3"
 
 services:
   wpt_server:
-    image: webpagetest/server
+    image: webpagetest/server:latest
+    shm_size: '2gb'
     volumes:
       - ./wpt_data/dat:/var/www/html/dat
       - ./wpt_data/results:/var/www/html/results
@@ -14,7 +15,8 @@ services:
     restart: unless-stopped
 
   wpt_agent:
-    image: webpagetest/agent
+    image: webpagetest/agent:latest
+    shm_size: '2gb'
     environment:
       SERVER_URL: http://localhost:4000/work/
       LOCATION: Local_Docker

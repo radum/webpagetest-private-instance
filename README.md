@@ -90,3 +90,8 @@ vagrant reload
 Open http://localhost:8080/
 ```
 
+# Docker commands
+
+```
+docker-compose build --pull --force-rm --no-cache
+```
